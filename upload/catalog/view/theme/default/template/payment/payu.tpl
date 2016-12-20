@@ -4,7 +4,7 @@
 $('#button-confirm').on('click', function() {
 	$.ajax({
 		type: 'get',
-		url: 'index.php?route=extension/payment/payu/confirm',
+		url: 'index.php?route=payment/payu/confirm',
 		cache: false,
 		beforeSend: function() {
 			$('#button-confirm').button('loading');

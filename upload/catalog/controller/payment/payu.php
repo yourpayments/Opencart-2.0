@@ -1,15 +1,15 @@
 <?php
-class ControllerExtensionPaymentPayu extends Controller
+class ControllerPaymentPayu extends Controller
 {
 	public function index()
 	{
 		$data['button_confirm'] = $this->language->get('button_confirm');
 		$data['text_loading'] = $this->language->get('text_loading');
 		$data['continue'] = $this->url->link('checkout/success');
-		
+
 		$option = array(
-			'merchant' => $this->config->get('payu_merchant'), 
-			'secretkey' => $this->config->get('payu_secretkey'), 
+			'merchant' => $this->config->get('payu_merchant'),
+			'secretkey' => $this->config->get('payu_secretkey'),
 			'debug' => $this->config->get('payu_debug'),
 			'button' => '
 				<div class="buttons">
@@ -31,8 +31,8 @@ class ControllerExtensionPaymentPayu extends Controller
 
 		$data['pay'] = $pay;
 
-		$template = 'extension/payment/payu';
-		
+		$template = 'default/template/payment/payu.tpl';
+
 		return $this->load->view($template, $data);
 	}
 
@@ -47,7 +47,7 @@ class ControllerExtensionPaymentPayu extends Controller
 	public function callback()
 	{
 		$option = array(
-			'merchant' => $this->config->get('payu_merchant'), 
+			'merchant' => $this->config->get('payu_merchant'),
 			'secretkey' => $this->config->get('payu_secretkey')
 		);
 
@@ -63,7 +63,7 @@ class ControllerExtensionPaymentPayu extends Controller
 
 	public function result_payment()
 	{
-		$this->load->language('extension/payment/payu');
+		$this->load->language('payment/payu');
 
 		$message = '';
 		if (isset($_GET['err'])) {
@@ -89,7 +89,7 @@ class ControllerExtensionPaymentPayu extends Controller
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
-		$template = 'extension/payment/payu_result';
+		$template = 'default/template/payment/payu_result.tpl';
 		$this->response->setOutput($this->load->view($template, $data));
 	}
 
@@ -154,41 +154,41 @@ class ControllerExtensionPaymentPayu extends Controller
 
 class PayU
 {
-	var 
-		$luUrl = "https://secure.payu.ru/order/lu.php", 
+	var
+		$luUrl = "https://secure.payu.ru/order/lu.php",
 		$button = "<input type='submit'>",
 		$debug = 0,
 		$showinputs = "hidden";
 
-	private static $Inst = false, 
-	               $merchant, 
+	private static $Inst = false,
+	               $merchant,
 	               $key;
 
-	private $data = array(), 
-	        $dataArr = array(), 
+	private $data = array(),
+	        $dataArr = array(),
 	        $answer = "";
 
 	private	$LUcell = array(
-			'MERCHANT' => 1, 
-			'ORDER_REF' => 0, 
-			'ORDER_DATE' => 1, 
-			'ORDER_PNAME' => 1, 
+			'MERCHANT' => 1,
+			'ORDER_REF' => 0,
+			'ORDER_DATE' => 1,
+			'ORDER_PNAME' => 1,
 			'ORDER_PGROUP' => 0,
-			'ORDER_PCODE' => 1, 
-			'ORDER_PINFO' => 0, 
-			'ORDER_PRICE' => 1, 
-			'ORDER_QTY' => 1, 
-			'ORDER_VAT' => 1, 
-			'ORDER_SHIPPING' => 1, 
-			'PRICES_CURRENCY' => 1, 
-			'PAY_METHOD' => 0, 
+			'ORDER_PCODE' => 1,
+			'ORDER_PINFO' => 0,
+			'ORDER_PRICE' => 1,
+			'ORDER_QTY' => 1,
+			'ORDER_VAT' => 1,
+			'ORDER_SHIPPING' => 1,
+			'PRICES_CURRENCY' => 1,
+			'PAY_METHOD' => 0,
 			'ORDER_PRICE_TYPE' => 1
 		);
 
 	private $IPNcell = array(
-		"IPN_PID", 
-		"IPN_PNAME", 
-		"IPN_DATE", 
+		"IPN_PID",
+		"IPN_PNAME",
+		"IPN_DATE",
 		"ORDERSTATUS"
 	);
 
@@ -199,12 +199,12 @@ class PayU
 	{}
 
 	public function __toString()
-	{ 
-		return ($this->answer === "") ? "<!-- Answer are not exists -->" : $this->answer;  
+	{
+		return ($this->answer === "") ? "<!-- Answer are not exists -->" : $this->answer;
 	}
 
 	public static function getInst()
-	{	
+	{
 		if (self::$Inst === false) {
 			self::$Inst = new PayU();
 		}
@@ -213,7 +213,7 @@ class PayU
 	}
 
 	#---------------------------------------------
-	# Add all options for PayU object. 
+	# Add all options for PayU object.
 	# Can change all public variables;
 	# $opt = array( merchant, secretkey, [ luUrl, debug, button ] );
 	#---------------------------------------------
@@ -239,21 +239,21 @@ class PayU
 	}
 
 	function setData($array = null)
-	{	
+	{
 		if ($array === null) {
 			die("No data");
 		}
 
 		$this->dataArr = $array;
-		
+
 		return $this;
 	}
 
 	#--------------------------------------------------------
 	#	Generate HASH
 	#--------------------------------------------------------
-	function Signature( $data = null ) 
-	{		
+	function Signature( $data = null )
+	{
 		$str = "";
 		foreach ($data as $v) {
 			$str .= $this->convData($v);
@@ -298,16 +298,16 @@ class PayU
 	# Outputs a string for hmac format.
 	# For a string like 'aa' it will return '2aa'.
 	#--------------------------------------------------------
-	private function convString($string) 
-	{	
+	private function convString($string)
+	{
 		return mb_strlen($string, '8bit') . $string;
 	}
 
 	#--------------------------------------------------------
 	# The same as convString except that it receives
 	# an array of strings and returns the string from all values within the array.
-	#--------------------------------------------------------	
-	private function convArray($array) 
+	#--------------------------------------------------------
+	private function convArray($array)
 	{
   		$return = '';
   		foreach ($array as $v) {
@@ -326,7 +326,7 @@ class PayU
 	#====================== LU GENERETE FORM =================================================
 
 	public function LU()
-	{	
+	{
 		$arr = &$this->dataArr;
 		$arr['MERCHANT'] = self::$merchant;
 
@@ -349,7 +349,7 @@ class PayU
 	{
 		$this->cells = array();
 		$ret = array();
-		foreach ($this->LUcell as $k => $v) { 	
+		foreach ($this->LUcell as $k => $v) {
 			if (isset($data[$k])) {
 				$ret[$k] = $data[$k];
 			} elseif ($v == 1) {
@@ -364,18 +364,18 @@ class PayU
 	# Method which create a form
 	#-----------------------------
 	private function genereteForm($data)
-	{	
+	{
 		$form = '<form target="_blank" method="post" action="'.$this->luUrl.'" accept-charset="utf-8">';
 		foreach ($data as $k => $v) {
 			$form .= $this->makeString( $k, $v );
 		}
 
 		return $form . $this->button .'</form>';
-	}	
+	}
 
 	#-----------------------------
 	# Make inputs for form
-	#-----------------------------	
+	#-----------------------------
 	private function makeString($name, $val)
 	{
 		$str = "";
@@ -390,13 +390,13 @@ class PayU
 		return $str;
 	}
 
-#======================= END LU =====================================	
+#======================= END LU =====================================
 
 
 #======================= IPN READ ANSWER ============================
 
 	public function IPN()
-	{	
+	{
 		$arr = &$this->dataArr;
 		$arr = $_POST;
 
@@ -406,7 +406,7 @@ class PayU
 			}
 		}
 
-		$hash = $arr["HASH"];  
+		$hash = $arr["HASH"];
 		unset($arr["HASH"]);
 		$sign = $this->Signature($arr);
 
@@ -416,9 +416,9 @@ class PayU
 
 		$datetime = date("YmdHis");
 		$sign = $this->Signature(array(
-			"IPN_PID" => $arr[ "IPN_PID" ][0], 
-			"IPN_PNAME" => $arr[ "IPN_PNAME" ][0], 
-			"IPN_DATE" => $arr[ "IPN_DATE" ], 
+			"IPN_PID" => $arr[ "IPN_PID" ][0],
+			"IPN_PNAME" => $arr[ "IPN_PNAME" ][0],
+			"IPN_DATE" => $arr[ "IPN_DATE" ],
 			"DATE" => $datetime
 		));
 

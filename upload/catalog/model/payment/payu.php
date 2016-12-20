@@ -1,7 +1,7 @@
-<?php 
-class ModelExtensionPaymentPayu extends Model {
+<?php
+class ModelPaymentPayu extends Model {
 	public function getMethod($address, $total) {
-		$this->load->language('extension/payment/payu');
+		$this->load->language('payment/payu');
 
 		$method_data = array(
 			'code'       => 'payu',
@@ -9,7 +9,7 @@ class ModelExtensionPaymentPayu extends Model {
 			'terms'      => '',
 			'sort_order' => $this->config->get('payu_sort_order')
 		);
-		
+
 		return $method_data;
 	}
 }

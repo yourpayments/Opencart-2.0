@@ -1,24 +1,24 @@
-<?php 
-class ControllerExtensionPaymentPayu extends Controller {
-	private $error = array(); 
+<?php
+class ControllerPaymentPayu extends Controller {
+	private $error = array();
 
 	public function index() {
-		$this->load->language('extension/payment/payu');
+		$this->load->language('payment/payu');
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('setting/setting');
 //------------------------------------------------------------
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('payu', $this->request->post);				
+			$this->model_setting_setting->editSetting('payu', $this->request->post);
 			$this->session->data['success'] = $this->language->get('text_success');
-			$this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'] .'&type=payment', 'SSL'));
+			$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 
-		$arr = array( 
-				"heading_title", "text_payment", "text_success", "text_pay", "text_card", 
-				"entry_merchant", "entry_secretkey", "entry_debug", "entry_LU", "entry_order_status", 
-				"entry_currency", "entry_backref", "entry_vat", "entry_order_type", "entry_language", "entry_status", 
+		$arr = array(
+				"heading_title", "text_payment", "text_success", "text_pay", "text_card",
+				"entry_merchant", "entry_secretkey", "entry_debug", "entry_LU", "entry_order_status",
+				"entry_currency", "entry_backref", "entry_vat", "entry_order_type", "entry_language", "entry_status",
 				"entry_sort_order", "error_permission", "error_merchant", "error_secretkey",
 				"entry_debug_on", "entry_debug_off", "entry_order_net", "entry_order_gross", "entry_ipn", "text_edit");
 
@@ -46,25 +46,25 @@ class ControllerExtensionPaymentPayu extends Controller {
 
    		$data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_payment'),
-			'href'      => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] .'&type=payment', 'SSL'),
+			'href'      => $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 
    		$data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('extension/payment/payu', 'token=' . $this->session->data['token'], 'SSL'),      		
+			'href'      => $this->url->link('payment/payu', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
-				
-		$data['action'] = $this->url->link('extension/payment/payu', 'token=' . $this->session->data['token'], 'SSL');
-		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] .'&type=payment', 'SSL');
+
+		$data['action'] = $this->url->link('payment/payu', 'token=' . $this->session->data['token'], 'SSL');
+		$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
 
 //------------------------------------------------------------
 		$this->load->model('localisation/order_status');
-		
+
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
-		
-		$arr = array( "payu_merchant", "payu_secretkey", "payu_debug", "payu_LU", "payu_currency", 
+
+		$arr = array( "payu_merchant", "payu_secretkey", "payu_debug", "payu_LU", "payu_currency",
 					  "payu_backref", "payu_vat", "payu_entry_order_type", "payu_language", "payu_status", "payu_sort_order", "payu_order_status_id" );
 
 		foreach ($arr as $v) {
@@ -72,8 +72,8 @@ class ControllerExtensionPaymentPayu extends Controller {
 		}
 
 		$data['payu_LU']      = is_null($data['payu_LU']) ? 'https://secure.payu.ru/order/lu.php' : $data['payu_LU'];
-		$data['payu_backref'] = is_null($data['payu_backref']) ? HTTPS_CATALOG . 'index.php?route=extension/payment/payu/result_payment' : $data['payu_backref'];
-		$data['payu_ipn']     = HTTPS_CATALOG . 'index.php?route=extension/payment/payu/callback';
+		$data['payu_backref'] = is_null($data['payu_backref']) ? HTTPS_CATALOG . 'index.php?route=payment/payu/result_payment' : $data['payu_backref'];
+		$data['payu_ipn']     = HTTPS_CATALOG . 'index.php?route=payment/payu/callback';
 
 //------------------------------------------------------------
 
@@ -83,16 +83,16 @@ class ControllerExtensionPaymentPayu extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['header'] = $this->load->controller('common/header');
 		$data['footer'] = $this->load->controller('common/footer');
-				
-		$this->response->setOutput($this->load->view('extension/payment/payu', $data));
+
+		$this->response->setOutput($this->load->view('payment/payu.tpl', $data));
 	}
 
 //------------------------------------------------------------
 	private function validate() {
-		if (!$this->user->hasPermission('modify', 'extension/payment/payu')) {
+		if (!$this->user->hasPermission('modify', 'payment/payu')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
-		
+
 		if (!$this->request->post['payu_merchant']) {
 			$this->error['merchant'] = $this->language->get('error_merchant');
 		}
