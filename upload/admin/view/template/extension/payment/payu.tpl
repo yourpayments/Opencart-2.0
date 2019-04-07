@@ -106,8 +106,8 @@
                 <label class="col-sm-2 control-label" for=""><?= $entry_vat; ?></label>
                 <div class="col-sm-10">
                   <select name="payu_vat" class="form-control">
-                    <option value="0" <?= $payu_vat != '19' ? 'selected="seleted"' : '' ?>>0%</option>
-                    <option value="19" <?= $payu_vat == '19' ? 'selected="seleted"' : '' ?>>18%</option>
+                    <option value="0" <?= $payu_vat != '21' ? 'selected="seleted"' : '' ?>>0%</option>
+                    <option value="21" <?= $payu_vat == '21' ? 'selected="seleted"' : '' ?>>20%</option>
                   </select>
                 </div>
               </div>
