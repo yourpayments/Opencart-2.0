@@ -1,14 +1,14 @@
 <?php
 // Heading
-$_['heading_title']      = 'PayU';
+$_['heading_title']      = 'YPMN';
 
 // Text 
 $_['text_payment']       = 'Payment';
-$_['text_payu']       	 = '<a onclick="window.open(\'http://www.payu.ru/\');"><img src="view/image/payment/payu.png" alt="PayU" title="PayU" style="border: 1px solid #EEEEEE;" /></a>';
+$_['text_payu']       	 = '<a onclick="window.open(\'http://www.ypmn.ru/\');"><img src="view/image/payment/payu.png" alt="PayU" title="PayU" style="border: 1px solid #EEEEEE;" /></a>';
 $_['text_success']       = 'Settings updated';   
-$_['text_pay']           = 'PayU';
+$_['text_pay']           = 'YPMN';
 $_['text_card']          = 'Credit Card';
-$_['text_edit']          = 'Edit PayU';
+$_['text_edit']          = 'Edit YPMN';
 
 // Entry
 $_['entry_merchant']     = 'Merchant ID:';
@@ -17,9 +17,9 @@ $_['entry_debug']        = 'Debug mode:';
 $_['entry_debug_on']     = 'On';
 $_['entry_debug_off']    = 'Off';
 
-$_['entry_LU']        	 = '<span data-toggle="tooltip" title="default: for PayU RU">Link for Live Update:</span>';
+$_['entry_LU']        	 = '<span data-toggle="tooltip" title="default: for ypmn RU">Link for Live Update:</span>';
 $_['entry_ipn']          = 'IPN\'s URL';
-$_['entry_backref']      = '<span data-toggle="tooltip" title="if empty - client will stay at PayU page">Back refference:</span>';
+$_['entry_backref']      = '<span data-toggle="tooltip" title="if empty - client will stay at ypmn page">Back refference:</span>';
 $_['entry_order_status'] = 'Order status after payment:';
 $_['entry_currency']     = 'Currency:';
 $_['entry_vat']       	 = '<span data-toggle="tooltip" title="0 - without VAT">VAT:</span>';
