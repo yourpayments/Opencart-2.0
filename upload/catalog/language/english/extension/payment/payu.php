@@ -1,6 +1,6 @@
 <?php
 // Text
-$_['text_title'] = 'Pay via PayU';
+$_['text_title'] = 'Pay via YPMN';
 
 $_['heading_title'] = 'Информация о статусе оплаты';
 $_['heading_subtitle'] = 'Уважаемый покупатель!';

@@ -1,14 +1,14 @@
 <?php
 // Heading
-$_['heading_title']      = 'PayU';
+$_['heading_title']      = '«Твои Платежи»';
 
 // Text 
 $_['text_payment']       = 'Оплата';
-$_['text_payu']       	 = '<a onclick="window.open(\'http://www.payu.ru/\');"><img src="view/image/payment/payu.png" alt="PayU" title="PayU" style="border: 1px solid #EEEEEE;" /></a>';
+$_['text_payu']       	 = '<a onclick="window.open(\'http://www.ypmn.ru/\');"><img src="view/image/payment/payu.png" alt="«Твои Платежи»" title="«Твои Платежи»" style="border: 1px solid #EEEEEE;" /></a>';
 $_['text_success']       = 'Настройки модуля обновлены!';   
-$_['text_pay']           = 'PayU';
+$_['text_pay']           = '«Твои Платежи»';
 $_['text_card']          = 'Credit Card';
-$_['text_edit']          = 'Редактирование PayU';
+$_['text_edit']          = 'Редактирование «Твои Платежи»';
 
 // Entry
 $_['entry_merchant']     = 'Merchant ID:';
@@ -18,7 +18,7 @@ $_['entry_debug_on']     = 'Включен';
 $_['entry_debug_off']    = 'Выключен';
 
 $_['entry_LU']        	 = '<span data-toggle="tooltip" title="По-умолчанию стоит стандартная ссылка для русских и украинских мерчантов">Ссылка Live Update:</span>';
-$_['entry_backref']      = '<span data-toggle="tooltip" title="Если оставить пустым - клиент останется в системе PayU">Ссылка возврата клиента:</span>';
+$_['entry_backref']      = '<span data-toggle="tooltip" title="Если оставить пустым - клиент останется в системе «Твои Платежи»">Ссылка возврата клиента:</span>';
 $_['entry_ipn']          = 'IPN URL';
 $_['entry_order_status'] = 'Статус заказа после оплаты:';
 $_['entry_currency']     = 'Валюта мерчанта';

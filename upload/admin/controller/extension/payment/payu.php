@@ -71,7 +71,7 @@ class ControllerExtensionPaymentPayu extends Controller {
 			$data[$v] = ( isset($this->request->post[$v]) ) ? $this->request->post[$v] : $this->config->get($v);
 		}
 
-		$data['payu_LU']      = is_null($data['payu_LU']) ? 'https://secure.payu.ru/order/lu.php' : $data['payu_LU'];
+		$data['payu_LU']      = is_null($data['payu_LU']) ? 'https://secure.ypmn.ru/order/lu.php' : $data['payu_LU'];
 		$data['payu_backref'] = is_null($data['payu_backref']) ? HTTPS_CATALOG . 'index.php?route=extension/payment/payu/result_payment' : $data['payu_backref'];
 		$data['payu_ipn']     = HTTPS_CATALOG . 'index.php?route=extension/payment/payu/callback';
 
